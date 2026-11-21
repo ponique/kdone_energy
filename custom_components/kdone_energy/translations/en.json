@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "경동원 홈네트워크 계정",
+        "data": {
+          "username": "아이디",
+          "password": "비밀번호",
+          "app_certify": "Existing certification number (optional)",
+          "start_month": "Data start month (optional, e.g. 2025-10)"
+        },
+        "description": "If you already completed wallpad certification, enter that number. Leave empty to request a new code on the wallpad. Enter a start month to exclude records from before you moved in."
+      },
+      "complex": {
+        "title": "단지 선택",
+        "data": {
+          "complex": "단지"
+        }
+      },
+      "certify": {
+        "title": "월패드 인증",
+        "description": "월패드에 표시된 인증번호를 입력하세요.",
+        "data": {
+          "certify_number": "인증번호"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "서버에 연결할 수 없습니다.",
+      "invalid_auth": "로그인/인증번호 요청에 실패했습니다. 아이디·비밀번호·단지를 확인하세요.",
+      "invalid_code": "인증번호가 올바르지 않습니다.",
+      "invalid_month": "Use the YYYY-MM format."
+    },
+    "abort": {
+      "already_configured": "이미 등록된 계정입니다.",
+      "invalid_auth": "재인증에 실패했습니다.",
+      "reauth_successful": "재인증 완료",
+      "cannot_connect": "Failed to connect to the server."
+    }
+  }
+}
