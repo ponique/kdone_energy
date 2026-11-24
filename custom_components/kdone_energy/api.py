@@ -283,8 +283,11 @@ class KDOneClient:
             months_rows = await self.used_list(
                 category, f"{start:%Y-%m}-01T00:00:00", end, "Month"
             )
+        # 일별은 지난달 1일부터 조회한다(호출 수 동일). 말일 값은 다음 날(1일) 새벽에야 채워지므로
+        # 지난달 일별 확정값을 last_month 센서의 daily 속성으로 내주기 위함.
+        prev_first = (today.replace(day=1) - timedelta(days=1)).replace(day=1)
         days_rows = await self.used_list(
-            category, f"{today:%Y-%m}-01T00:00:00", end, "Day"
+            category, f"{prev_first.isoformat()}T00:00:00", end, "Day"
         )
         self.last_rows = {"Month": months_rows, "Day": days_rows}
         unit = None
@@ -304,6 +307,8 @@ class KDOneClient:
         this_month = f"{today:%Y-%m}"
         last_month = f"{(today.replace(day=1) - timedelta(days=1)):%Y-%m}"
         # 캐시된 월 값은 조회 시점까지의 이번달 값이라 낡았을 수 있다 -> 일별 합계를 우선.
+        prev_days = {k: v for k, v in days.items() if k[:7] == last_month}
+        days = {k: v for k, v in days.items() if k[:7] == this_month}
         month_now = sum(days.values()) if days else months.get(this_month)
         # 누적(start 이후): 지난달까지 확정된 월 값 + 이번달. 월초에 0으로 돌아가지 않으므로
         # 하루 3회 조회여도 월말 마지막 조회 뒤의 사용량이 다음 날 지난달 확정값으로 반영된다.
@@ -314,6 +319,7 @@ class KDOneClient:
             "unit": unit,
             "months": months,
             "days": days,
+            "prev_days": prev_days,
             "today": days.get(today.isoformat()),
             "this_month": month_now,
             "last_month": months.get(last_month),

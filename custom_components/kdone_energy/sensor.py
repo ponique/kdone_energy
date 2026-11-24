@@ -126,5 +126,5 @@ class KDOneUsageSensor(CoordinatorEntity[KDOneCoordinator], SensorEntity):
         if self._period.key == "this_month":
             return {"daily": d.get("days"), "raw_unit": d.get("unit")}
         if self._period.key == "last_month":
-            return {"monthly": d.get("months"), "raw_unit": d.get("unit")}
+            return {"monthly": d.get("months"), "daily": d.get("prev_days"), "raw_unit": d.get("unit")}
         return {"raw_unit": d.get("unit")}

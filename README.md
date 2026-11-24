@@ -42,7 +42,7 @@ python kdone_usage_cli.py
 
 수동 설치: `custom_components/kdone_energy` 폴더를 HA `config/custom_components/`에 복사 후 재시작.
 
-생성 센서 (항목별): `○○ 누적 사용량`(데이터 시작 월 이후, 리셋 없음), `○○ 오늘 사용량`, `○○ 이번달 사용량`(일별 attribute), `○○ 지난달 사용량`(월별 attribute). 전 기간 0인 항목(냉방)은 만들지 않습니다.
+생성 센서 (항목별): `○○ 누적 사용량`(데이터 시작 월 이후, 리셋 없음), `○○ 오늘 사용량`, `○○ 이번달 사용량`(일별 attribute), `○○ 지난달 사용량`(월별 `monthly`·지난달 일별 `daily` attribute). 전 기간 0인 항목(냉방)은 만들지 않습니다.
 
 ## 에너지 대시보드
 
